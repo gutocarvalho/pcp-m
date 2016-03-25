@@ -90,13 +90,13 @@ Existem 3 VMs no ambiente
 
 * puppetserver.hacklab, 192.168.251.20
 
-### ambiente::puppetserver
+### ambiente::puppet-pcpm.hack;ab
 
-Nesta VM será instalado o puppet server 2.1.2, puppet agent 1.4.1.
+Nesta VM serão instaladas todas as tecnologias citadas.
 
 ## Uso
 
-### uso::puppetserver
+### uso::puppet-pcpm
 
 acessando a vm
 
@@ -117,6 +117,8 @@ O environment trazido deste repositório contém os arquivos abaixo
 - - - Puppetfile
 - - - environment.conf
 - - - hieradata
+- - - - nodes
+- - - - - puppet-pcpm.hacklab.yaml
 - - - - Debian-8.yaml
 - - - - RedHat-7.yaml
 - - - - common.yaml
@@ -143,7 +145,9 @@ O environment trazido deste repositório contém os arquivos abaixo
 - - - - - - broker.pp
 - - - - - - puppetdb.pp
 - - - - - - puppetmaster.pp
+- - - - - - pcpm.pp
 ```
+
 
 ## Mcollective
 
