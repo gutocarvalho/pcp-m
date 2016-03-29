@@ -20,6 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "puppetserver" do |puppetserver|
     puppetserver.vm.hostname = "puppet-pcpm.hacklab"
     puppetserver.vm.network :private_network, ip: "192.168.251.20"
+    puppetserver.hostsupdater.aliases = ["dashboard.puppet-pcpm.hacklab"]
     puppetserver.vm.provision "shell", path: "install.sh"
     puppetserver.vm.provision :hosts do |provisioner|
       provisioner.autoconfigure = true
