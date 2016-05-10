@@ -31,6 +31,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.proxy.http     = HTTP_PROXY
     config.proxy.https    = HTTPS_PROXY
     config.proxy.no_proxy = "localhost, 127.0.0.1, .hacklab"
+    print "proxy settings: \n"
+    print " - proxy.http:  "+config.proxy.http+"\n"
+    print " - proxy.https: "+config.proxy.https+"\n"
+    print " - no_proxy: "+config.proxy.no_proxy+"\n\n"
   end
 
   # box para todas as VM
