@@ -77,11 +77,18 @@ Para o caso de estar atrás de um serviço proxy:
   vagrant plugin install vagrant-proxyconf
   ```
 
-2. altere as configurações no ```Vagrantfile``` (linhas 11 e 12) de acordo com o seu serviço de proxy
+2. Configuration
+
+  If necessary set OS proxy environment variable: PROXY | HTTP_PROXY | HTTPS_PROXY="http://proxy:port"
 
   ```
-  config.proxy.http     = "http://10.122.19.54:5865"
-  config.proxy.https    = "http://10.122.19.54:5865"
+  $ export PROXY="http://proxy:3128"
+
+  or
+
+  $ export HTTP_PROXY="http://proxy:3128"
+
+  ...
   ```
 
 ## Ambiente
