@@ -1,21 +1,15 @@
 #!/bin/bash
 
-CONTROL_REPO="https://github.com/gutocarvalho/pcp-controlrepo.git"
+CONTROL_REPO="https://github.com/puppet-br/pcp-controlrepo"
 
-# limpando diretorios
+puppet resource package git ensure=present
+puppet resource package vim-enhanced ensure=present
+
 rm -rf /etc/puppetlabs/code/*
 rm -rf /etc/puppetlabs/puppet/ssl
 
-# definindo locale
-export LC_ALL='en_US.UTF-8'
-
-# apagando certificados
-rm -rf /etc/puppetlabs/puppet/ssl
-
-# instalando r10k
 /opt/puppetlabs/puppet/bin/gem install --no-ri --no-rdoc r10k
 
-# configurando hieradata
 cat > /etc/puppetlabs/code/hiera.yaml <<EOF
 ---
 :backends:
@@ -26,15 +20,8 @@ cat > /etc/puppetlabs/code/hiera.yaml <<EOF
   - "%{::osfamily}-%{::operatingsystemmajrelease}"
   - "%{::osfamily}"
   - common
-
-:yaml:
-# - /etc/puppetlabs/code/environments/%{environment}/hieradata on *nix
-# - %CommonAppData%\PuppetLabs\code\environments\%{environment}\hieradata on Windows
-# When specifying a datadir, make sure the directory exists.
-  :datadir:
 EOF
 
-# configurando r10k
 mkdir -p /etc/puppetlabs/r10k
 cat > /etc/puppetlabs/r10k/r10k.yaml <<EOF
 ---
@@ -45,8 +32,6 @@ cat > /etc/puppetlabs/r10k/r10k.yaml <<EOF
     remote: $CONTROL_REPO
 EOF
 
-# deploy do environment
 /opt/puppetlabs/puppet/bin/r10k deploy environment production -v debug --puppetfile
 
-# chama o puppet
 puppet apply /etc/puppetlabs/code/environments/production/manifests/site.pp
