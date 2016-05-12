@@ -14,10 +14,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # box para todas as VM
-  config.vm.box = "gutocarvalho/centos7x64"
+  config.vm.box = "puppetlabs/centos-7.2-64-puppet"
+  #config.vm.box_check_update = false
 
   # puppet server + puppet agent
-  config.vm.define "puppetserver" do |puppetserver|
+  config.vm.define "puppetserver-pcpm" do |puppetserver|
     puppetserver.vm.hostname = "puppet-pcpm.hacklab"
     puppetserver.vm.network :private_network, ip: "192.168.251.20"
     puppetserver.vm.provision "shell", path: "install.sh"
